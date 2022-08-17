@@ -80,7 +80,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
         global cam
         p = "-"
         if (cam.counter >= 10):
-            file = open("/var/www/html/status.txt", "r")
+            file = open("./status.txt", "r")
             p = file.read()
             file.close()
             cam.counter = 0
@@ -146,10 +146,10 @@ class camera:
         print("Capturing")
         self.camera.start_preview()
         #time.sleep(1)
-        self.camera.capture("/var/www/html/gallery/%s" % (name))
+        self.camera.capture("./gallery/%s" % (name))
         self.camera.stop_preview()
 
-        file = open("/var/www/html/status.txt", "w")
+        file = open("./status.txt", "w")
         file.write("-")
         file.close()
 
@@ -161,12 +161,12 @@ class camera:
             self.resolution = (1280, 720)
             self.framerate = 60
 
-        file = open("/var/www/html/status.txt", "w")
+        file = open("./status.txt", "w")
         file.write("-")
         file.close()
 
     def setCamera(self, speak):
-        file = open("/var/www/html/settings.txt", "r")
+        file = open("./settings.txt", "r")
         settings = file.read()
         file.close()
         sett = settings.split('|')
@@ -193,7 +193,7 @@ class camera:
         self.camera.exposure_mode = sett[6]
         self.camera.awb_mode = sett[7]
 
-        file = open("/var/www/html/status.txt", "w")
+        file = open("./status.txt", "w")
         file.write("-")
         file.close()
 
