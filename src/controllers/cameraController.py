@@ -1,5 +1,5 @@
 
-import time
+import datetime
 
 from Cheese.cheeseController import CheeseController as cc
 
@@ -36,7 +36,9 @@ class CameraController(cc):
     #@get /capture;
     @staticmethod
     def capture(server, path, auth):
+        name = datetime.datetime.now().timestamp().replace(" ", "_")
+
         Camera.stop_recording()
-        Camera.capture(f"picture_{time.now()}.png")
+        Camera.capture(f"picture_{name}.png")
         Camera.start_recording()
         return cc.createResponse({"STATUS": "OK"})
