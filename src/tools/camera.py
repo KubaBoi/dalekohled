@@ -1,3 +1,4 @@
+
 import platform
 if (platform.system() != "Windows"):
     import picamera
@@ -7,6 +8,16 @@ from Cheese.resourceManager import ResMan
 from src.tools.streamingOutput import StreamingOutput
 
 class Camera:
+
+    defaultSettings = {
+        "FPS": 60,
+        "RES": (720, 480), 
+        "ANN": "Framerate: 60", 
+        "BRI": 50, 
+        "CONT": 50, 
+        "EXP": "auto", 
+        "AWB": "auto"
+    }
 
     @staticmethod
     def init():
@@ -43,6 +54,10 @@ class Camera:
         else: #framerate 60 res 1280x720
             Camera.resolution = (1280, 720)
             Camera.framerate = 60
+
+    @staticmethod
+    def setDefault():
+        Camera.setCamera(Camera.defaultSettings)
 
     @staticmethod
     def setCamera(args):

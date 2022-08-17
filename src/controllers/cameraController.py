@@ -24,6 +24,11 @@ class CameraController(cc):
     #@get /capture;
     @staticmethod
     def capture(server, path, auth):
+        args = cc.readArgs(server)
+        cc.checkJson(["FPS", "RES", "ANN", "BRI", "CONT", "EXP", "AWB"], args)
+
         Camera.stop_recording()
+        Camera.setCamera(args)
         Camera.capture("photo.png")
+        Camera.setDefault()
         Camera.start_recording()
