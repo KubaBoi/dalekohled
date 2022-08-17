@@ -12,7 +12,7 @@ class CameraController(cc):
         args = cc.readArgs(server)
         cc.checkJson(["FPS", "RES", "ANN", "BRI", "CONT", "EXP", "AWB"], args)
 
-        #Camera.set
+        Camera.setCamera(args)
 
     #@get /readSettings;
     @staticmethod
