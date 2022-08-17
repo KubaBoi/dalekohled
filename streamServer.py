@@ -19,26 +19,27 @@ PAGE="""\
 """
 
 class StreamingOutput(object):
-    def __init__(self):
-        self.frame = None
-        self.buffer = io.BytesIO()
-        self.condition = Condition()
+    
+    @staticmethod
+    def init():
+        StreamingOutput.frame = None
+        StreamingOutput.buffer = io.BytesIO()
+        StreamingOutput.condition = Condition()
 
-    def write(self, buf):
+    @staticmethod
+    def write(buf):
         if buf.startswith(b'\xff\xd8'):
             # New frame, copy the existing buffer's content and notify all
             # clients it's available
-            self.buffer.truncate()
-            with self.condition:
-                self.frame = self.buffer.getvalue()
-                self.condition.notify_all()
-            self.buffer.seek(0)
-        return self.buffer.write(buf)
+            StreamingOutput.buffer.truncate()
+            with StreamingOutput.condition:
+                StreamingOutput.frame = StreamingOutput.buffer.getvalue()
+                StreamingOutput.condition.notify_all()
+            StreamingOutput.buffer.seek(0)
+        return StreamingOutput.buffer.write(buf)
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
-        global output
-
         if self.path == '/':
             self.send_response(301)
             self.send_header('Location', '/index.html')
@@ -59,9 +60,9 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
             try:
                 while True:
-                    with output.condition:
-                        output.condition.wait()
-                        frame = output.frame
+                    with StreamingOutput.condition:
+                        StreamingOutput.condition.wait()
+                        frame = StreamingOutput.frame
                     self.wfile.write(b'--FRAME\r\n')
                     self.send_header('Content-Type', 'image/jpeg')
                     self.send_header('Content-Length', len(frame))

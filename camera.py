@@ -3,9 +3,8 @@ import picamera
 from streamServer import *
 
 class camera:
-    def __init__(self, output):
+    def __init__(self):
         self.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
-        self.output = output
         self.counter = 0
         self.resolution = (1280, 720) # 2592|1944|15||40|38|auto|auto|
         self.framerate = 60
@@ -29,7 +28,7 @@ class camera:
         self.camera.annotate_foreground = picamera.Color("white")
         self.camera.annotate_text = ("Framerate: %s" % (self.framerate))
 
-        self.camera.start_recording(self.output, format='mjpeg')
+        self.camera.start_recording(StreamingOutput, format='mjpeg')
         print("Camera on")
 
     def stop_recording(self):

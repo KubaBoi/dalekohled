@@ -1,5 +1,5 @@
 from camera import *
 
-output = StreamingOutput()
-cam = camera(output)
+StreamingOutput.init()
+cam = camera()
 cam.start_session()
