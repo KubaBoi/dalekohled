@@ -10,7 +10,7 @@ class CameraController(cc):
     @staticmethod
     def changeSettings(server, path, auth):
         args = cc.readArgs(server)
-        cc.checkJson(["FPS", "RES", "ANN", "BRI", "CONT", "EXP", "AWB"], args)
+        cc.checkJson(["FPS", "RES", "ANN", "BRI", "CONT", "EXP", "AWB", "SS"], args)
 
         Camera.setCamera(args)
 
@@ -21,14 +21,15 @@ class CameraController(cc):
     def readSettings(server, path, auth):
         return cc.createResponse(Camera.readCameraSettings())
 
+    #@get /setDef;
+    @staticmethod
+    def setDef(server, path, auth):
+        Camera.setDefault()
+        return cc.createResponse({"STATUS": "OK"})
+
     #@get /capture;
     @staticmethod
     def capture(server, path, auth):
-        args = cc.readArgs(server)
-        cc.checkJson(["FPS", "RES", "ANN", "BRI", "CONT", "EXP", "AWB"], args)
-
         Camera.stop_recording()
-        Camera.setCamera(args)
         Camera.capture("photo.png")
-        Camera.setDefault()
         Camera.start_recording()

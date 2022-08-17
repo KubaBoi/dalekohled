@@ -12,7 +12,8 @@ class Camera:
     defaultSettings = {
         "FPS": 60,
         "RES": (720, 480), 
-        "ANN": "Framerate: 60", 
+        "ANN": "Framerate: 60",
+        "SS": 10, 
         "BRI": 50, 
         "CONT": 50, 
         "EXP": "auto", 
@@ -70,6 +71,7 @@ class Camera:
             Camera.camera.annotate_text = args["ANN"]
         else:
             Camera.camera.annotate_text = ""
+        Camera.camera.shutter_speed = int(args["SS"])
         Camera.camera.brightness = int(args["BRI"])
         Camera.camera.contrast = int(args["CONT"])
         Camera.camera.exposure_mode = args["EXP"]
@@ -80,7 +82,8 @@ class Camera:
         return {
             "FPS": Camera.camera.framerate,
             "RES": Camera.camera.resolution, 
-            "ANN": Camera.camera.annotate_text, 
+            "ANN": Camera.camera.annotate_text,
+            "SS": Camera.camera.shutter_speed, 
             "BRI": Camera.camera.brightness, 
             "CONT": Camera.camera.contrast, 
             "EXP": Camera.camera.exposure_mode, 
