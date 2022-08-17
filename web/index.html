@@ -15,7 +15,7 @@
         <tr>
             <td>Framerate:</td>
             <td>
-                <select id="fpsInp">
+                <select id="fpsInp" onchange="changedSetts()">
                     <option value="60">60 fps</option>
                     <option value="30">30 fps</option>
                 </select>
@@ -24,7 +24,7 @@
         <tr>
             <td>Resolution:</td>
             <td>
-                <select id="resInp">
+                <select id="resInp" onchange="changedSetts()">
                     <option value="1920x1080">HD (1920x1080)</option>
                     <option value="1280x720">720p (1280x720)</option>
                     <option value="1280x720">480p (720x480)</option>
@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td>Annotation:</td>
-            <td><input id="annInp"></td>
+            <td><input id="annInp" onchange="changedSetts()"></td>
         </tr>
         <tr><td><hr></td></tr>
         <tr>
