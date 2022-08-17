@@ -1,0 +1,5 @@
+body {
+    color: var(--main-text-color);
+    background-color: var(--main-color);
+    font-family: Arial, Helvetica, sans-serif;
+}

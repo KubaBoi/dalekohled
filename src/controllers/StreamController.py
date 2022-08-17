@@ -32,34 +32,4 @@ class StreamController(cc):
             #StreamController.pause()
 
         return CheeseNone()
-
-
-    # METHODS
-
-    def pause():
-        p = "-"
-        if (Camera.counter >= 10):
-            file = open("./status.txt", "r")
-            p = file.read()
-            file.close()
-            Camera.counter = 0
-
-        if (len(p) < 1):
-            p = "-"
-
-        if (p[0] != "-" and p[0] != "1" and p[0] != "0"): #fotecka
-            Camera.stop_recording()
-            Camera.setCamera(True)
-            Camera.capture(p)
-            Camera.start_recording()
-        elif (p[0] == "0"): #zmena framerate
-            Camera.stop_recording()
-            Camera.changeFramerate()
-            Camera.start_recording()
-        elif (p[0] == "1"): #zmena nastaveni
-            Camera.stop_recording()
-            Camera.setCamera(True)
-            Camera.start_recording()
-
-        Camera.counter += 1
         
