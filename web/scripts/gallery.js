@@ -8,9 +8,9 @@ async function getGallery() {
         clearTable(tbl);
         for (let i = 0; i < resp.FILES.length; i++) {
             if (resp.FILES[i] == ".gitkeep") continue;
-            console.log(resp.FILES[i]);
+
             addRow(tbl, [
-                {"text": `<img src="/gallery/${resp.FILES[i]}>"`}
+                {"text": `<img src="/gallery/${resp.FILES[i]}">`}
             ]);
         }
     }
