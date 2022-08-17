@@ -29,7 +29,7 @@ class StreamController(cc):
             server.end_headers()
             server.wfile.write(frame)
             server.wfile.write(b"\r\n")
-            StreamController.pause()
+            #StreamController.pause()
 
         return CheeseNone()
 
