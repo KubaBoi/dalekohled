@@ -25,7 +25,7 @@ async function changedSetts() {
         "FPS": document.getElementById("fpsInp").value,
         "RES": document.getElementById("resInp").value.split("x"), 
         "ANN": document.getElementById("annInp").value,
-        "SS": document.getElementById("shutSpInp").value, 
+        "SS": document.getElementById("shutSpInp").value * 1000, 
         "BRI": document.getElementById("briInp").value, 
         "CONT": document.getElementById("contInp").value, 
         "EXP": document.getElementById("expInp").value, 
