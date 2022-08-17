@@ -59,6 +59,7 @@ class Camera:
 
     @staticmethod
     def setCamera(speak):
+        return
         file = open("./settings.txt", "r")
         settings = file.read()
         file.close()
