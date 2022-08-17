@@ -12,6 +12,7 @@ class Camera:
         Camera.counter = 0
         Camera.resolution = (1280, 720) # 2592|1944|15||40|38|auto|auto|
         Camera.framerate = 60
+        Camera.
 
     @staticmethod
     def start_recording():
@@ -59,7 +60,6 @@ class Camera:
 
     @staticmethod
     def setCamera(speak):
-        return
         file = open("./settings.txt", "r")
         settings = file.read()
         file.close()
@@ -92,5 +92,13 @@ class Camera:
         file.close()
 
     @staticmethod
-    def speak():
-        print("Ziju")
+    def readCameraSettings():
+        return {
+            "FPS": Camera.camera.framerate,
+            "RES": Camera.camera.resolution, 
+            "ANN": Camera.camera.annotate_text, 
+            "BRI": Camera.camera.brightness, 
+            "CONT": Camera.camera.contrast, 
+            "EXP": Camera.camera.exposure_mode, 
+            "AWB": Camera.camera.awb_mode
+        }
