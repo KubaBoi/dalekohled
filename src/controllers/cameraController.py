@@ -14,7 +14,16 @@ class CameraController(cc):
 
         Camera.setCamera(args)
 
+        return cc.createResponse({"STATUS": "Changed"})
+
     #@get /readSettings;
     @staticmethod
     def readSettings(server, path, auth):
         return cc.createResponse(Camera.readCameraSettings())
+
+    #@get /capture;
+    @staticmethod
+    def capture(server, path, auth):
+        Camera.stop_recording()
+        Camera.capture("photo.png")
+        Camera.start_recording()

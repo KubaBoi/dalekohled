@@ -2,6 +2,8 @@ import platform
 if (platform.system() != "Windows"):
     import picamera
 
+from Cheese.resourceManager import ResMan
+
 from src.tools.streamingOutput import StreamingOutput
 
 class Camera:
@@ -29,10 +31,9 @@ class Camera:
 
     @staticmethod
     def capture(name):
-        print("Capturing")
         Camera.camera.start_preview()
         #time.sleep(1)
-        Camera.camera.capture("./gallery/%s" % (name))
+        Camera.camera.capture(ResMan.web("gallery", name))
         Camera.camera.stop_preview()
 
     @staticmethod
