@@ -71,6 +71,7 @@ class Camera:
             Camera.camera.annotate_text = args["ANN"]
         else:
             Camera.camera.annotate_text = ""
+        print(Camera.camera.shutter_speed)
         #Camera.camera.shutter_speed = int(args["SS"])
         Camera.camera.brightness = int(args["BRI"])
         Camera.camera.contrast = int(args["CONT"])
