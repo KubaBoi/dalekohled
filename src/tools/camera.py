@@ -23,7 +23,7 @@ class Camera:
     @staticmethod
     def init():
         Camera.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
-        Camera.setDefault()
+        #Camera.setDefault()
 
     @staticmethod
     def start_recording():
