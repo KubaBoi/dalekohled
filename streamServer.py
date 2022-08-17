@@ -1,9 +1,10 @@
 import time
-import io
 import logging
 import socketserver
-from threading import Condition
 from http import server
+
+from camera import *
+from streamOutput import *
 
 PAGE="""\
 <html>
@@ -17,26 +18,6 @@ PAGE="""\
 </body>
 </html>
 """
-
-class StreamingOutput(object):
-    
-    @staticmethod
-    def init():
-        StreamingOutput.frame = None
-        StreamingOutput.buffer = io.BytesIO()
-        StreamingOutput.condition = Condition()
-
-    @staticmethod
-    def write(buf):
-        if buf.startswith(b'\xff\xd8'):
-            # New frame, copy the existing buffer's content and notify all
-            # clients it's available
-            StreamingOutput.buffer.truncate()
-            with StreamingOutput.condition:
-                StreamingOutput.frame = StreamingOutput.buffer.getvalue()
-                StreamingOutput.condition.notify_all()
-            StreamingOutput.buffer.seek(0)
-        return StreamingOutput.buffer.write(buf)
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
@@ -79,32 +60,31 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
 
     def pause(self):
-        global cam
         p = "-"
-        if (cam.counter >= 10):
+        if (Camera.counter >= 10):
             file = open("./status.txt", "r")
             p = file.read()
             file.close()
-            cam.counter = 0
+            Camera.counter = 0
 
         if (len(p) < 1):
             p = "-"
 
         if (p[0] != "-" and p[0] != "1" and p[0] != "0"): #fotecka
-            cam.stop_recording()
-            cam.setCamera(True)
-            cam.capture(p)
-            cam.start_recording()
+            Camera.stop_recording()
+            Camera.setCamera(True)
+            Camera.capture(p)
+            Camera.start_recording()
         elif (p[0] == "0"): #zmena framerate
-            cam.stop_recording()
-            cam.changeFramerate()
-            cam.start_recording()
+            Camera.stop_recording()
+            Camera.changeFramerate()
+            Camera.start_recording()
         elif (p[0] == "1"): #zmena nastaveni
-            cam.stop_recording()
-            cam.setCamera(True)
-            cam.start_recording()
+            Camera.stop_recording()
+            Camera.setCamera(True)
+            Camera.start_recording()
 
-        cam.counter += 1
+        Camera.counter += 1
 
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True

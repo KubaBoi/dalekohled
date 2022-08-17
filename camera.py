@@ -1,64 +1,62 @@
 import picamera
 
-from streamServer import *
+from streamOutput import *
 
-class camera:
-    def __init__(self):
-        self.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
-        self.counter = 0
-        self.resolution = (1280, 720) # 2592|1944|15||40|38|auto|auto|
-        self.framerate = 60
+class Camera:
 
-    def start_session(self):
-        self.start_recording()
-        try:
-            address = ("", 8000)
-            server = StreamingServer(address, StreamingHandler)
-            server.serve_forever()
-        finally:
-            self.stop_recording()
+    @staticmethod
+    def init():
+        Camera.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
+        Camera.counter = 0
+        Camera.resolution = (1280, 720) # 2592|1944|15||40|38|auto|auto|
+        Camera.framerate = 60
 
-    def start_recording(self):
+    @staticmethod
+    def start_recording():
         #camera.rotation = 90
-        self.setCamera(True)
-        self.camera.resolution = self.resolution
-        self.camera.framerate = self.framerate
+        Camera.setCamera(True)
+        Camera.camera.resolution = Camera.resolution
+        Camera.camera.framerate = Camera.framerate
 
-        self.camera.annotate_text_size = 50
-        self.camera.annotate_foreground = picamera.Color("white")
-        self.camera.annotate_text = ("Framerate: %s" % (self.framerate))
+        Camera.camera.annotate_text_size = 50
+        Camera.camera.annotate_foreground = picamera.Color("white")
+        Camera.camera.annotate_text = ("Framerate: %s" % (Camera.framerate))
 
-        self.camera.start_recording(StreamingOutput, format='mjpeg')
+        Camera.camera.start_recording(StreamingOutput, format='mjpeg')
         print("Camera on")
 
-    def stop_recording(self):
-        self.camera.stop_recording()
+    @staticmethod
+    def stop_recording():
+        Camera.camera.stop_recording()
         print("Camera off")
 
-    def capture(self, name):
+    @staticmethod
+    def capture(name):
         print("Capturing")
-        self.camera.start_preview()
+        Camera.camera.start_preview()
         #time.sleep(1)
-        self.camera.capture("./gallery/%s" % (name))
-        self.camera.stop_preview()
+        Camera.camera.capture("./gallery/%s" % (name))
+        Camera.camera.stop_preview()
 
         file = open("./status.txt", "w")
         file.write("-")
         file.close()
 
-    def changeFramerate(self):
-        if (self.framerate == 60): #framerate 30 res 1920x1080
-            self.resolution = (1920, 1080)
-            self.framerate = 30
+    @staticmethod
+    def changeFramerate():
+        if (Camera.framerate == 60): #framerate 30 res 1920x1080
+            Camera.resolution = (1920, 1080)
+            Camera.framerate = 30
         else: #framerate 60 res 1280x720
-            self.resolution = (1280, 720)
-            self.framerate = 60
+            Camera.resolution = (1280, 720)
+            Camera.framerate = 60
 
         file = open("./status.txt", "w")
         file.write("-")
         file.close()
 
-    def setCamera(self, speak):
+    @staticmethod
+    def setCamera(speak):
         file = open("./settings.txt", "r")
         settings = file.read()
         file.close()
@@ -73,22 +71,23 @@ class camera:
             print("Exposure mode: %s" % (sett[6]))
             print("AWB: %s" % (sett[7]))
 
-        self.camera.resolution = (int(sett[0]), int(sett[1]))
-        self.camera.framerate = int(sett[2])
+        Camera.camera.resolution = (int(sett[0]), int(sett[1]))
+        Camera.camera.framerate = int(sett[2])
         if (sett[3] != ""):
-            self.camera.annotate_text_size = 50
-            self.camera.annotate_foreground = picamera.Color("white")
-            self.camera.annotate_text = sett[3]
+            Camera.camera.annotate_text_size = 50
+            Camera.camera.annotate_foreground = picamera.Color("white")
+            Camera.camera.annotate_text = sett[3]
         else:
-            self.camera.annotate_text = ""
-        self.camera.brightness = int(sett[4])
-        self.camera.contrast = int(sett[5])
-        self.camera.exposure_mode = sett[6]
-        self.camera.awb_mode = sett[7]
+            Camera.camera.annotate_text = ""
+        Camera.camera.brightness = int(sett[4])
+        Camera.camera.contrast = int(sett[5])
+        Camera.camera.exposure_mode = sett[6]
+        Camera.camera.awb_mode = sett[7]
 
         file = open("./status.txt", "w")
         file.write("-")
         file.close()
 
-    def speak(self):
+    @staticmethod
+    def speak():
         print("Ziju")

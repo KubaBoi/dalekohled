@@ -1,5 +1,13 @@
 from camera import *
+from streamServer import *
 
 StreamingOutput.init()
-cam = camera()
-cam.start_session()
+Camera.init()
+
+Camera.start_recording()
+try:
+    address = ("", 8000)
+    server = StreamingServer(address, StreamingHandler)
+    server.serve_forever()
+finally:
+    Camera.stop_recording()
