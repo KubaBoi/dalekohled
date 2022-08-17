@@ -36,7 +36,8 @@ class CameraController(cc):
     #@get /capture;
     @staticmethod
     def capture(server, path, auth):
-        name = datetime.datetime.now().replace(" ", "_")
+        now = datetime.datetime.now()
+        name = now.strftime("%Y_%m_%dT%H_%M_%S")
 
         Camera.stop_recording()
         Camera.capture(f"picture_{name}.png")
