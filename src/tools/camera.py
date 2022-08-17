@@ -47,7 +47,7 @@ class Camera:
         Camera.camera.start_preview()
         if (Camera.shutter_speed != 0):
             Camera.camera.shutter_speed = Camera.shutter_speed
-            Camera.camera.capture_sequence([ResMan.web("gallery", name)],use_video_port=True)
+            Camera.camera.capture(ResMan.web("gallery", name))
             Camera.camera.shutter_speed = 0
         else:
             Camera.camera.capture(ResMan.web("gallery", name))
