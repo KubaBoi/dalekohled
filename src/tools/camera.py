@@ -12,7 +12,6 @@ class Camera:
         Camera.counter = 0
         Camera.resolution = (1280, 720) # 2592|1944|15||40|38|auto|auto|
         Camera.framerate = 60
-        Camera.
 
     @staticmethod
     def start_recording():
