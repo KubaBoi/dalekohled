@@ -46,6 +46,7 @@ class Camera:
     def capture(name):
         Camera.camera.start_preview()
         if (Camera.shutter_speed != 0):
+            print("Shutter")
             Camera.camera.shutter_speed = Camera.shutter_speed
             Camera.camera.capture(ResMan.web("gallery", name))
             Camera.camera.shutter_speed = 0
