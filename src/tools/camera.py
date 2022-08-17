@@ -63,8 +63,8 @@ class Camera:
 
     @staticmethod
     def setCamera(args):
-        #Camera.camera.resolution = (int(args["RES"][0]), int(args["RES"][1]))
-        Camera.camera.framerate = int(args["FPS"])
+        Camera.camera.resolution = (int(args["RES"][0]), int(args["RES"][1]))
+        #Camera.camera.framerate = int(args["FPS"])
         if (args["ANN"] != ""):
             Camera.camera.annotate_text_size = 50
             Camera.camera.annotate_foreground = picamera.Color("white")
