@@ -2,7 +2,7 @@
 async function readCamSetts() {
     let resp = await callEndpoint("GET", "/camera/readSettings");
     if (resp.ERROR == null) {
-        document.getElementById("shutSpInp").value = resp.SS;
+        document.getElementById("shutSpInp").value = resp.SS/1000;
         document.getElementById("briInp").value = resp.BRI;
         document.getElementById("contInp").value = resp.CONT;
     }
