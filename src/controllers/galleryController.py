@@ -3,10 +3,8 @@ import os
 from Cheese.cheeseController import CheeseController as cc
 from Cheese.resourceManager import ResMan 
 
-from src.tools.camera import *
-
 #@controller /gallery;
-class CameraController(cc):
+class GalleryController(cc):
 
     #@get /get;
     @staticmethod
