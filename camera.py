@@ -7,7 +7,7 @@ class camera:
         self.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
         self.output = output
         self.counter = 0
-        self.resolution = (1280, 720)
+        self.resolution = (1280, 720) # 2592|1944|15||40|38|auto|auto|
         self.framerate = 60
 
     def start_session(self):
