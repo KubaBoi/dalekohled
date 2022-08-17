@@ -23,7 +23,7 @@ async function setDefault() {
 async function changedSetts() {
     let req = {
         "FPS": document.getElementById("fpsInp").value,
-        "RES": document.getElementById("resInp").value, 
+        "RES": document.getElementById("resInp").value.split("x"), 
         "ANN": document.getElementById("annInp").value,
         "SS": document.getElementById("shutSpInp").value, 
         "BRI": document.getElementById("briInp").value, 
