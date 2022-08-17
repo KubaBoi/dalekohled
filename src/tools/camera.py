@@ -1,4 +1,6 @@
-import picamera
+import platform
+if (platform.system() != "Windows"):
+    import picamera
 
 from src.tools.streamingOutput import StreamingOutput
 

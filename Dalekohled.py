@@ -22,4 +22,5 @@ if __name__ == "__main__":
     try:
         CheeseBurger.serveForever()
     finally:
+        print("Camera stop")
         Camera.stop_recording()
