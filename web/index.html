@@ -23,7 +23,7 @@
         <tr>
             <td>Resolution:</td>
             <td>
-                <select id="fpsInp">
+                <select id="resInp">
                     <option value="1920x1080">HD (1920x1080)</option>
                     <option value="1280x720">720p (1280x720)</option>
                     <option value="1280x720">480p (720x480)</option>
@@ -38,21 +38,21 @@
         <tr><td><hr></td></tr>
         <tr>
             <td>Shutter speed:</td>
-            <td><input type="number" id="shutSpInp" min="10" max="100000"> ms</td>
+            <td><input type="number" id="shutSpInp" min="10" max="100000" onchange="changedSetts()"> ms</td>
         </tr>
         <tr>
             <td>Brightness:</td>
-            <td><input type="number" id="briInp" min="0" max="100"> %</td>
+            <td><input type="number" id="briInp" min="0" max="100" onchange="changedSetts()"> %</td>
         </tr>
         <tr>
             <td>Contrast:</td>
-            <td><input type="number" id="contInp" min="0" max="100"> %</td>
+            <td><input type="number" id="contInp" min="0" max="100" onchange="changedSetts()"> %</td>
         </tr>
         <tr><td><hr></td></tr>
         <tr>
             <td>Exposure mode:</td>
             <td>
-                <select id="expInp">
+                <select id="expInp" onchange="changedSetts()">
                     <option value="auto">auto</option>
                     <option value="off">off</option>
                     <option value="night">night</option>
@@ -72,7 +72,7 @@
         <tr>
             <td>AWB mode:</td>
             <td>
-                <select id="expInp">
+                <select id="awbInp" onchange="changedSetts()">
                     <option value="auto">auto</option>
                     <option value="off">off</option>
                     <option value="sunlight">sunlight</option>
@@ -87,6 +87,9 @@
             </td>
         </tr>
     </table>
+    <br>
+    <button onclick="capture()">Take picture</button><br>
+    <button onclick="setDefault()">Set default</button><br>
 
     <img src="/stream/get.mjpg" class="preview"> 
 
