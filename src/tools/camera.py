@@ -44,6 +44,7 @@ class Camera:
 
     @staticmethod
     def capture(name):
+        Camera.stop_recording()
         Camera.camera.start_preview()
         if (Camera.shutter_speed != 0):
             Camera.camera.shutter_speed = Camera.shutter_speed
@@ -52,6 +53,7 @@ class Camera:
         else:
             Camera.camera.capture(ResMan.web("gallery", name))
         Camera.camera.stop_preview()
+        Camera.start_recording()
 
     @staticmethod
     def changeFramerate():
