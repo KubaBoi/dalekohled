@@ -23,7 +23,7 @@ class Camera:
     @staticmethod
     def init():
         Camera.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
-        #Camera.setDefault()
+        Camera.setDefault()
 
     @staticmethod
     def start_recording():
@@ -64,7 +64,7 @@ class Camera:
     @staticmethod
     def setCamera(args):
         Camera.stop_recording()
-        Camera.camera.resolution = (int(args["RES"][0]), int(args["RES"][1]))
+        #Camera.camera.resolution = (int(args["RES"][0]), int(args["RES"][1]))
         Camera.camera.framerate = int(args["FPS"])
         if (args["ANN"] != ""):
             Camera.camera.annotate_text_size = 50
