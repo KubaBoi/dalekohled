@@ -23,6 +23,7 @@ class Camera:
     @staticmethod
     def init():
         Camera.camera = picamera.PiCamera(resolution="1280x720", framerate=60)
+        Camera.shutter_speed = 0
         Camera.setDefault()
 
     @staticmethod
@@ -44,8 +45,12 @@ class Camera:
     @staticmethod
     def capture(name):
         Camera.camera.start_preview()
-        #time.sleep(1)
-        Camera.camera.capture(ResMan.web("gallery", name))
+        if (Camera.shutter_speed != 0):
+            Camera.camera.shutter_speed = Camera.shutter_speed
+            Camera.camera.capture_sequence(ResMan.web("gallery", name))
+            Camera.camera.shutter_speed = 0
+        else:
+            Camera.camera.capture(ResMan.web("gallery", name))
         Camera.camera.stop_preview()
 
     @staticmethod
@@ -71,7 +76,7 @@ class Camera:
             Camera.camera.annotate_text = args["ANN"]
         else:
             Camera.camera.annotate_text = ""
-        Camera.camera.shutter_speed = int(args["SS"])
+        Camera.shutter_speed = int(args["SS"])
         Camera.camera.brightness = int(args["BRI"])
         Camera.camera.contrast = int(args["CONT"])
         Camera.camera.exposure_mode = args["EXP"]
@@ -83,7 +88,7 @@ class Camera:
             "FPS": Camera.camera.framerate,
             "RES": Camera.camera.resolution, 
             "ANN": Camera.camera.annotate_text,
-            "SS": Camera.camera.shutter_speed, 
+            "SS": Camera.shutter_speed, 
             "BRI": Camera.camera.brightness, 
             "CONT": Camera.camera.contrast, 
             "EXP": Camera.camera.exposure_mode, 
