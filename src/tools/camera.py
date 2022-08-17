@@ -13,7 +13,7 @@ class Camera:
         "FPS": 60,
         "RES": (720, 480), 
         "ANN": "Framerate: 60",
-        "SS": 10, 
+        "SS": 16, 
         "BRI": 50, 
         "CONT": 50, 
         "EXP": "auto", 
