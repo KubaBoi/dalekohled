@@ -37,6 +37,8 @@ class StreamingOutput(object):
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
+        global output
+
         if self.path == '/':
             self.send_response(301)
             self.send_header('Location', '/index.html')
