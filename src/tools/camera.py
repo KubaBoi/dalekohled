@@ -64,14 +64,14 @@ class Camera:
     @staticmethod
     def setCamera(args):
         Camera.camera.resolution = (int(args["RES"][0]), int(args["RES"][1]))
-        #Camera.camera.framerate = int(args["FPS"])
+        Camera.camera.framerate = int(args["FPS"])
         if (args["ANN"] != ""):
             Camera.camera.annotate_text_size = 50
             Camera.camera.annotate_foreground = picamera.Color("white")
             Camera.camera.annotate_text = args["ANN"]
         else:
             Camera.camera.annotate_text = ""
-        Camera.camera.shutter_speed = int(args["SS"])
+        #Camera.camera.shutter_speed = int(args["SS"])
         Camera.camera.brightness = int(args["BRI"])
         Camera.camera.contrast = int(args["CONT"])
         Camera.camera.exposure_mode = args["EXP"]
