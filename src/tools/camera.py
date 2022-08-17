@@ -63,6 +63,7 @@ class Camera:
 
     @staticmethod
     def setCamera(args):
+        Camera.stop_recording()
         Camera.camera.resolution = (int(args["RES"][0]), int(args["RES"][1]))
         Camera.camera.framerate = int(args["FPS"])
         if (args["ANN"] != ""):
@@ -76,6 +77,7 @@ class Camera:
         Camera.camera.contrast = int(args["CONT"])
         Camera.camera.exposure_mode = args["EXP"]
         Camera.camera.awb_mode = args["AWB"]
+        Camera.start_recording()
 
     @staticmethod
     def readCameraSettings():
