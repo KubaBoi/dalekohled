@@ -1,4 +1,5 @@
 
+import time
 import platform
 if (platform.system() != "Windows"):
     import picamera
@@ -49,6 +50,8 @@ class Camera:
             print("Shutter")
             Camera.camera.shutter_speed = Camera.shutter_speed
             Camera.camera.capture(ResMan.web("gallery", name))
+            time.sleep(int(Camera.camera.shutter_speed/1000000))
+            Camera.camera.exposure_mode = 'off'
             Camera.camera.shutter_speed = 0
         else:
             Camera.camera.capture(ResMan.web("gallery", name))
