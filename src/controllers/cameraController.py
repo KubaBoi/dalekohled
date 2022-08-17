@@ -12,7 +12,9 @@ class CameraController(cc):
         args = cc.readArgs(server)
         cc.checkJson(["FPS", "RES", "ANN", "BRI", "CONT", "EXP", "AWB", "SS"], args)
 
+        Camera.stop_recording()
         Camera.setCamera(args)
+        Camera.start_recording()
 
         return cc.createResponse({"STATUS": "Changed"})
 
@@ -24,7 +26,9 @@ class CameraController(cc):
     #@get /setDef;
     @staticmethod
     def setDef(server, path, auth):
+        Camera.stop_recording()
         Camera.setDefault()
+        Camera.start_recording()
         return cc.createResponse({"STATUS": "OK"})
 
     #@get /capture;
