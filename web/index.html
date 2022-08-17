@@ -35,14 +35,20 @@
             <td>Annotation:</td>
             <td><input id="annInp"></td>
         </tr>
+        <tr><td><hr></td></tr>
+        <tr>
+            <td>Shutter speed:</td>
+            <td><input type="number" id="shutSpInp" min="10" max="100000"> ms</td>
+        </tr>
         <tr>
             <td>Brightness:</td>
-            <td><input type="number" id="briInp" min="0" max="100"></td>
+            <td><input type="number" id="briInp" min="0" max="100"> %</td>
         </tr>
         <tr>
             <td>Contrast:</td>
-            <td><input type="number" id="contInp" min="0" max="100"></td>
+            <td><input type="number" id="contInp" min="0" max="100"> %</td>
         </tr>
+        <tr><td><hr></td></tr>
         <tr>
             <td>Exposure mode:</td>
             <td>
@@ -78,12 +84,6 @@
                     <option value="flash">flash</option>
                     <option value="horizon">horizon</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Shutter speed:</td>
-            <td>
-                <input type="number" id="shutSpInp" min="0"> ms
             </td>
         </tr>
     </table>
