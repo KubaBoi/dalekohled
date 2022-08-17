@@ -1,4 +1,6 @@
 
+import time
+
 from Cheese.cheeseController import CheeseController as cc
 
 from src.tools.camera import *
@@ -35,5 +37,6 @@ class CameraController(cc):
     @staticmethod
     def capture(server, path, auth):
         Camera.stop_recording()
-        Camera.capture("photo.png")
+        Camera.capture(f"picture_{time.now()}.png")
         Camera.start_recording()
+        return cc.createResponse({"STATUS": "OK"})

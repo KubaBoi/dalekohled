@@ -31,5 +31,9 @@ async function changedSetts() {
         "EXP": document.getElementById("expInp").value, 
         "AWB": document.getElementById("awbInp").value
     };
-    console.log(req);
+    
+    let resp = await callEndpoint("POST", "/camera/changeSettings", req);
+    if (resp.ERROR != null) {
+        showErrorAlert(response.ERROR, alertTime);
+    }
 } 
