@@ -5,6 +5,7 @@ if (platform.system() != "Windows"):
     import picamera
 
 from Cheese.resourceManager import ResMan
+from Cheese.Logger import Logger
 
 from src.tools.streamingOutput import StreamingOutput
 
@@ -51,6 +52,7 @@ class Camera:
             Camera.camera.shutter_speed = Camera.shutter_speed
             Camera.camera.capture(ResMan.web("gallery", name))
             time.sleep(int(Camera.camera.shutter_speed/1000000))
+            Logger.info(f"Sleeping {int(Camera.camera.shutter_speed/1000000)}")
             Camera.camera.exposure_mode = 'off'
             Camera.camera.shutter_speed = 0
         else:
