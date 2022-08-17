@@ -31,9 +31,7 @@ class StreamController(cc):
                 server.wfile.write(b"\r\n")
                 StreamController.pause()
         except Exception as e:
-            Logger.warning(
-                "Removed streaming client %s: %s",
-                server.client_address, str(e))
+            Logger.warning(f"Removed streaming client {server.client_address}: {str(e)}")
 
         return CheeseNone()
 
