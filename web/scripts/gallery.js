@@ -10,7 +10,7 @@ async function getGallery() {
             if (resp.FILES[i] == ".gitkeep") continue;
 
             addRow(tbl, [
-                {"text": `<img src="/gallery/${resp.FILES[i]}">`}
+                {"text": `<img src="/gallery/${resp.FILES[i]}" width=100%>`}
             ]);
         }
     }
