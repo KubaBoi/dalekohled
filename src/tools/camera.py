@@ -47,18 +47,11 @@ class Camera:
     @staticmethod
     def capture(name):
         Camera.camera.start_preview()
-        if (Camera.shutter_speed != 0):
-            print("Shutter")
-            Camera.camera.shutter_speed = Camera.shutter_speed
-            Camera.camera.capture(ResMan.web("gallery", name))
-            Logger.info(f"Shutter speed {Camera.shutter_speed}")
-            Logger.info(f"Sleeping {int(Camera.shutter_speed/1000000)}")
-            time.sleep(int(Camera.shutter_speed/1000000))
-            Camera.camera.exposure_mode = 'off'
-            Camera.camera.shutter_speed = 0
-        else:
-            Camera.camera.capture(ResMan.web("gallery", name))
+        Camera.camera.shutter_speed = Camera.shutter_speed
+        time.sleep(int(Camera.shutter_speed/1000000))
+        Camera.camera.capture(ResMan.web("gallery", name))
         Camera.camera.stop_preview()
+        Camera.camera.shutter_speed = 0
 
     @staticmethod
     def changeFramerate():
