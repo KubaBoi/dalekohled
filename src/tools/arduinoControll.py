@@ -2,7 +2,6 @@
 import serial
 import time
 arduinoMain = serial.Serial(port="COM4", baudrate=115200, timeout=1)
-#arduinoDisplay = serial.Serial(port="COM3", baudrate=9600, timeout=.1)
 
 def write_read(arduino, x):
     arduino.write(bytes(x, "utf-8"))

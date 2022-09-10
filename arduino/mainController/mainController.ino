@@ -26,7 +26,7 @@ Quaternion q;           // [w, x, y, z] kvaternion
 VectorFloat gravity;    // [x, y, z] vektor setrvačnosti
 float rotace[3];        // rotace kolem os x,y,z
 
-int lcdCounter = 0;
+bool backLight = true;
 
 // actual data from gyro senzor
 float z;
@@ -40,11 +40,13 @@ int verticalSpeed = 0;
 
 // Rutina přerušení
 volatile bool mpuInterrupt = false;
-void dmpINT() {
+void dmpINT() 
+{
   mpuInterrupt = true;
 }
 
-void setup() {  
+void setup() 
+{  
   for (int i = 46; i < 54; i++) pinMode(i, OUTPUT);   
     
   Wire.begin();
@@ -63,25 +65,41 @@ void setup() {
   setupGyro();
 }
 
-void loop() {  
+void loop() 
+{  
   if (!dmpReady) return;
 
   command = Serial.readString();
   command.trim();
   
   int indexOfSplit = command.indexOf("|");
-  if (indexOfSplit != -1) {
+  if (indexOfSplit != -1) 
+  {
     horizontalSpeed = command.substring(0, indexOfSplit).toInt();
     verticalSpeed = command.substring(indexOfSplit+1, command.length()).toInt();
   }
-  else if (command == "GET") {
+  else if (command == "GET") 
+  {
     // DATAZ|Y|TEMP
     Serial.println("DATA" + String(z) + "|" + String(y) + "|" + String(temp));
   }
-  else if (command == "STOP") {
-    Serial.println("STOP");
+  else if (command == "STOP") 
+  {
     horizontalSpeed = 0;
     verticalSpeed = 0;
+  }
+  else if (command == "LIGHT")
+  {
+    if (backLight) 
+    {
+      lcd.noBacklight();
+      backLight = false;
+    }
+    else 
+    {
+      lcd.backlight();
+      backLight = true;
+    }
   }
 
   lcd.setCursor(0, 0);
