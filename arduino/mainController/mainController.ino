@@ -45,6 +45,8 @@ void dmpINT() {
 }
 
 void setup() {  
+  for (int i = 46; i < 54; i++) pinMode(i, OUTPUT);   
+    
   Wire.begin();
 
   lcd.begin();
@@ -82,20 +84,16 @@ void loop() {
     verticalSpeed = 0;
   }
 
-  if (lcdCounter >= 100) {
-    //lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(prepareValueToLcd(z));
-    lcd.setCursor(0, 1);
-    lcd.print(prepareValueToLcd(y));
-    lcd.setCursor(8, 0);
-    lcd.print(String(temp) + " C" + (char)223);
-    lcdCounter = 0;
-  }
-  lcdCounter++;
+  lcd.setCursor(0, 0);
+  lcd.print(prepareValueToLcd(z));
+  lcd.setCursor(0, 1);
+  lcd.print(prepareValueToLcd(y));
+  lcd.setCursor(8, 0);
+  lcd.print(String(temp) + " C" + (char)223);
 
   horStepper.step(horizontalSpeed);
   vertStepper.step(verticalSpeed);
+  if (horizontalSpeed == 0 && verticalSpeed == 0) turnOffEngines();
   
   readGyro();
   delay(10);
@@ -160,4 +158,8 @@ void setupGyro()
     lcd.setCursor(0, 0);
     lcd.print("ERROR: " + String(devStatus));
   }
+}
+
+void turnOffEngines() {
+  for (int i = 46; i < 54; i++) digitalWrite(i, LOW);
 }
