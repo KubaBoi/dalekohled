@@ -18,7 +18,7 @@ void setup()
 
 void loop()
 {
-  //myStepper.step(-10);
+  myStepper.step(-10);
 	while (Serial.available()) {
 		command = Serial.readString();
 		/*
