@@ -48,6 +48,3 @@ class Controller:
                     
                 s.sendall(bytes(f"{hor_speed}|{vert_speed}", "utf-8"))
                 time.sleep(0.2)
-
-Controller.init("192.168.0.108", 55573)
-Controller.controller_thread()
