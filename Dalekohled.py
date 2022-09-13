@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import platform
+import threading
 
 from Cheese.cheese import CheeseBurger
 
@@ -22,6 +23,14 @@ if __name__ == "__main__":
         StreamingOutput.init()
         Camera.init()
         Camera.start_recording()
+
+    from src.tools.arduinoControll import ArduinoController
+    ArduinoController.init()
+
+    from src.tools.socketServer import SocketServer
+    socket_server = SocketServer()
+    socket_thread = threading.Thread(target=socket_server.serve_forever)
+    socket_thread.start()
 
     try:
         CheeseBurger.serveForever()
