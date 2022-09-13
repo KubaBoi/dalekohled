@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import platform
+
 from Cheese.cheese import CheeseBurger
 
 """
@@ -15,9 +17,11 @@ if __name__ == "__main__":
     from src.tools.camera import *
     from src.tools.streamingOutput import *
 
-    StreamingOutput.init()
-    Camera.init()
-    Camera.start_recording()
+
+    if (platform.system() != "Windows"):
+        StreamingOutput.init()
+        Camera.init()
+        Camera.start_recording()
 
     try:
         CheeseBurger.serveForever()

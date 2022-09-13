@@ -152,18 +152,18 @@ void readGyro() {
 
 void setupGyro() 
 {
-  Serial.println("Inicializace I2C zarizeni..");
+  //Serial.println("Inicializace I2C zarizeni..");
   mpu.initialize();
-  Serial.println("Test pripojenych zarizeni..");
-  Serial.println(mpu.testConnection() ? "Modul pripojeni" : "Pripojeni modulu selhalo");
-  Serial.println("Inicializace DMP...");
+  //Serial.println("Test pripojenych zarizeni..");
+  //Serial.println(mpu.testConnection() ? "Modul pripojeni" : "Pripojeni modulu selhalo");
+  //Serial.println("Inicializace DMP...");
   devStatus = mpu.dmpInitialize();
   if (devStatus == 0) {
-    Serial.println("Povoleni DMP...");
+    //Serial.println("Povoleni DMP...");
     mpu.setDMPEnabled(true);
     attachInterrupt(0, dmpINT, RISING);
     mpuIntStatus = mpu.getIntStatus();
-    Serial.println("DMP pripraveno, cekam na prvni preruseni..");
+    //Serial.println("DMP pripraveno, cekam na prvni preruseni..");
     dmpReady = true;
     packetSize = mpu.dmpGetFIFOPacketSize();
   }
@@ -171,7 +171,7 @@ void setupGyro()
     // V případě chyby:
     // 1 : selhání připojení k DMP
     // 2 : selhání při nastavení DMP
-    Serial.println("DMP inicializace selhala (kod " + String(devStatus) + ")");
+    //Serial.println("DMP inicializace selhala (kod " + String(devStatus) + ")");
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("ERROR: " + String(devStatus));
